@@ -53,4 +53,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.room:room-runtime:2.8.0")
     kapt("androidx.room:room-compiler:2.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
 }

@@ -39,6 +39,9 @@ class LoginForm : AppCompatActivity() {
         spannable.setSpan(ForegroundColorSpan(Color.parseColor("#90DAFF")), condStart, condEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         checkbox.text = spannable
+
+        btnLogin.setOnClickListener { val intent = Intent(this, MainView::class.java)
+            startActivity(intent)  };
     }
 
 }

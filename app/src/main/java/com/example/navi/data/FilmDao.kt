@@ -10,14 +10,14 @@ import androidx.room.Update
 interface FilmDao {
 
     @Insert
-    fun insertFilm(film: Film)
+    suspend fun insertFilm(film: Film)
 
     @Update
-    fun updateFilm(film: Film)
+    suspend fun updateFilm(film: Film)
 
     @Delete
-    fun deleteFilm(film: Film)
+    suspend fun deleteFilm(film: Film)
 
     @Query("SELECT * FROM film")
-    fun getAllFilm(): List<Film>
+    suspend fun getAllFilm(): List<Film>
 }
