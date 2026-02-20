@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,7 @@ class FilmForm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_film_form)
-        val btnPilihGambar = findViewById<Button>(R.id.btnPilihGambar)
+        val btnPilihGambar = findViewById<TextView>(R.id.btnPilihGambar)
         imgPreview = findViewById(R.id.imgPreview)
 
         btnPilihGambar.setOnClickListener {
