@@ -129,6 +129,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHarga"
                         android:layout_width="match_parent"
+                        android:inputType="number"
                         android:layout_height="wrap_content"
                         android:textColor="@color/wgray"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -153,7 +154,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:id="@+id/btnSimpan"
+                    android:id="@+id/btnSave"
                     android:textColor="@color/tcolor2"
                     android:textAlignment="center"
                     android:gravity="center"
