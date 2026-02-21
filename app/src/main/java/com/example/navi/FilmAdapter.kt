@@ -17,7 +17,7 @@ class FilmAdapter(
 ) : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
 
     inner class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val btnDelete: Button = itemView.findViewById(R.id.btnDelete)
+        val btnDelete: ImageView = itemView.findViewById(R.id.btnDelete)
         val tvJudul: TextView = itemView.findViewById(R.id.tvJudul)
         val tvGenre: TextView = itemView.findViewById(R.id.tvGenre)
         val imgPoster: ImageView = itemView.findViewById(R.id.imgPoster)

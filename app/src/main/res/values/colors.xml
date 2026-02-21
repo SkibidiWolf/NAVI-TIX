@@ -14,10 +14,11 @@
     <color name="background2">#1E1F22</color>
     <color name="blue">#31C3FF</color>
     <color name="lightblue">#F25AA4FF</color>
-    <color name="yellow">#D09918</color>
+    <color name="yellow">#FFC107</color>
     <color name="red">#AD2F41</color>
     <color name="darkblue">#221F68</color>
     <color name="tagc">#F8343292</color>
     <color name="nightblue2">#301C1A43</color>
     <color name="pinkywhite">#F0E2E9</color>
+    <color name="white2">#EBEBEB</color>
 </resources>
