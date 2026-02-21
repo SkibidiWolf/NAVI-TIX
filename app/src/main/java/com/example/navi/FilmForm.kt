@@ -1,5 +1,6 @@
 package com.example.navi
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
@@ -9,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.navi.data.AppDatabase
 import com.example.navi.data.Film
 import com.example.navi.data.FilmDao
 import com.google.android.material.textfield.TextInputEditText
@@ -20,10 +22,15 @@ class FilmForm : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
 
     private val pickImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             if (uri != null) {
                 selectedImageUri = uri
                 imgPreview.setImageURI(uri)
+
+                contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
             }
         }
 
@@ -32,6 +39,8 @@ class FilmForm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_film_form)
+        val db = AppDatabase.getDatabase(applicationContext)
+        filmDao = db.filmDao()
 
         val btnPilihGambar = findViewById<TextView>(R.id.btnPilihGambar)
         imgPreview = findViewById(R.id.imgPreview)
@@ -44,7 +53,7 @@ class FilmForm : AppCompatActivity() {
         val btnSave = findViewById<TextView>(R.id.btnSave)
 
         btnPilihGambar.setOnClickListener {
-            pickImage.launch("image/*")
+            pickImage.launch(arrayOf("image/*"))
         }
 
         btnSave.setOnClickListener {
