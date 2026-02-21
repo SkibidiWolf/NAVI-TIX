@@ -20,7 +20,7 @@ class FilmAdapter(
         val btnDelete: Button = itemView.findViewById(R.id.btnDelete)
         val tvJudul: TextView = itemView.findViewById(R.id.tvJudul)
         val tvGenre: TextView = itemView.findViewById(R.id.tvGenre)
-
+        val imgPoster: ImageView = itemView.findViewById(R.id.imgPoster)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
@@ -35,7 +35,13 @@ class FilmAdapter(
         holder.tvJudul.text = film.judul
         holder.tvGenre.text = film.genre
 
-
+        if (!film.posterUri.isNullOrEmpty()) {
+            try {
+                holder.imgPoster.setImageURI(Uri.parse(film.posterUri))
+            } catch (e: Exception) {
+                holder.imgPoster.setImageResource(R.drawable.ic_launcher_background)
+            }
+        }
 
         holder.btnDelete.setOnClickListener {
             onDeleteClick(film)
