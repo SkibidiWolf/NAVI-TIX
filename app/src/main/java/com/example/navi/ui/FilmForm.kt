@@ -49,6 +49,7 @@ class FilmForm : AppCompatActivity() {
         val etJudul = findViewById<TextInputEditText>(R.id.etJudul)
         val etGenre = findViewById<TextInputEditText>(R.id.etGenre)
         val etDurasi = findViewById<TextInputEditText>(R.id.etDurasi)
+        val etJadwal = findViewById<TextInputEditText>(R.id.etJadwal)
         val etHarga = findViewById<TextInputEditText>(R.id.etHarga)
 
         val btnSave = findViewById<TextView>(R.id.btnSave)
@@ -63,6 +64,7 @@ class FilmForm : AppCompatActivity() {
             val genre = etGenre.text.toString()
             val durasi = etDurasi.text.toString().toIntOrNull() ?: 0
             val harga = etHarga.text.toString().toIntOrNull() ?: 0
+            val tanggal = etJadwal.text.toString()
             val poster = selectedImageUri?.toString() ?: ""
 
             // Nanti di sini kamu insert ke database
@@ -71,6 +73,7 @@ class FilmForm : AppCompatActivity() {
                 judul = judul,
                 genre = genre,
                 durasi = durasi,
+                jadwaltayang = tanggal,
                 hargaTiket = harga,
                 posterUri = poster
             )

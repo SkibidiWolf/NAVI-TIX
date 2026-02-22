@@ -11,5 +11,6 @@ data class Film(
     val posterUri: String,
     val genre: String,
     val durasi: Int,
+    val jadwaltayang: String,
     val hargaTiket: Int
 )

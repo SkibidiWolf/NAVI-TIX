@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NAVI">
         <activity
+            android:name=".ui.DetailFilmActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.FilmForm"
             android:exported="false" />
         <activity
