@@ -20,6 +20,7 @@ class DetailFilmActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     private lateinit var filmDao: FilmDao
     private var filmId: Int = 0
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,7 +30,7 @@ class DetailFilmActivity : AppCompatActivity() {
 
         filmId = intent.getIntExtra("filmId", 0)
 
-        val btnDelete = findViewById<Button>(R.id.btnDelete)
+        val btnDelete = findViewById<TextView>(R.id.btnDelete)
 
         btnDelete.setOnClickListener {
             lifecycleScope.launch {
@@ -40,21 +41,39 @@ class DetailFilmActivity : AppCompatActivity() {
 
         val imgPoster = findViewById<ImageView>(R.id.imgPosterDetail)
         val imgBackground = findViewById<ImageView>(R.id.imgPosterBackground)
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
         val tvJudul = findViewById<TextView>(R.id.tvJudulDetail)
         val tvGenre = findViewById<TextView>(R.id.tvGenreDetail)
         val tvDurasi = findViewById<TextView>(R.id.tvDurasiDetail)
         val tvHarga = findViewById<TextView>(R.id.tvHargaDetail)
+        val tvDirector = findViewById<TextView>(R.id.tvDirectorDetail)
+        val tvSynopsis = findViewById<TextView>(R.id.tvSynopsisDetail)
+        val tvRelease = findViewById<TextView>(R.id.tvReleaseDetail)
+        val tvDescRelease = findViewById<TextView>(R.id.tvDescReleaseDetail)
+        val tvDescJudul = findViewById<TextView>(R.id.tvDescJudulDetail)
+        val tvDescDirector = findViewById<TextView>(R.id.tvDescDirectorDetail)
+
+        btnBack.setOnClickListener { finish() }
 
         // Ambil data dari intent
         val judul = intent.getStringExtra("judul")
         val genre = intent.getStringExtra("genre")
         val durasi = intent.getIntExtra("durasi", 0)
+        val director = intent.getStringExtra("director")
+        val synopsis = intent.getStringExtra("synopsis")
+        val release = intent.getStringExtra("tanggal")
         val harga = intent.getIntExtra("harga", 0)
         val poster = intent.getStringExtra("poster")
 
         tvJudul.text = judul
+        tvDescJudul.text = judul
         tvGenre.text = genre
         tvDurasi.text = "$durasi Minutes"
+        tvDirector.text = director
+        tvDescDirector.text = director
+        tvSynopsis.text = synopsis
+        tvRelease.text = release
+        tvDescRelease.text = release
         tvHarga.text = "Rp $harga"
 
         if (!poster.isNullOrEmpty()) {

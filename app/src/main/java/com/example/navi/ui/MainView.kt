@@ -54,6 +54,11 @@ class MainView : AppCompatActivity() {
                     intent.putExtra("filmId", film.idFilm)
                     intent.putExtra("judul", film.judul)
                     intent.putExtra("genre", film.genre)
+                    intent.putExtra("durasi", film.durasi)
+                    intent.putExtra("director", film.director)
+                    intent.putExtra("synopsis", film.synopsis)
+                    intent.putExtra("tanggal", film.jadwaltayang)
+                    intent.putExtra("harga", film.hargaTiket)
                     intent.putExtra("poster", film.posterUri)
 
                     startActivity(intent)
