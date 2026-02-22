@@ -17,6 +17,7 @@ class DetailFilmActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_film)
 
         val imgPoster = findViewById<ImageView>(R.id.imgPosterDetail)
+        val imgBackground = findViewById<ImageView>(R.id.imgPosterBackground)
         val tvJudul = findViewById<TextView>(R.id.tvJudulDetail)
         val tvGenre = findViewById<TextView>(R.id.tvGenreDetail)
         val tvDurasi = findViewById<TextView>(R.id.tvDurasiDetail)
@@ -35,7 +36,9 @@ class DetailFilmActivity : AppCompatActivity() {
         tvHarga.text = "Harga: Rp $harga"
 
         if (!poster.isNullOrEmpty()) {
-            imgPoster.setImageURI(Uri.parse(poster))
+            val uri = Uri.parse(poster)
+            imgPoster.setImageURI(uri)
+            imgBackground.setImageURI(uri)
         }
     }
 

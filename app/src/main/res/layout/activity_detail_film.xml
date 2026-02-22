@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.DetailFilmActivity">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/umamusumebanner"
+                android:id="@+id/imgPosterBackground"
                 android:scaleType="centerCrop" />
                 <View
                     android:layout_width="match_parent"
@@ -98,7 +100,7 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:text="17+"
+                                        android:text="13+"
                                         android:textSize="15sp"
                                         android:textAlignment="center"
                                         android:gravity="center"
@@ -116,6 +118,14 @@
                                 android:layout_gravity="center"
                                 android:textColor="@color/white"/>
                         </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Director"
+                            android:id="@+id/tvDirectorDetail"
+                            android:textSize="14sp"
+
+                            android:textColor="@color/white"/>
 
                         <!--Minutes or release-->
                         <LinearLayout
@@ -128,7 +138,7 @@
                                 android:text="Release Date"
                                 android:id="@+id/tvReleaseDetail"
                                 android:textSize="15sp"
-                                android:layout_marginTop="30dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
                                 android:textColor="@color/white"/>
                             <TextView
@@ -138,15 +148,160 @@
                                 android:layout_marginStart="20dp"
                                 android:id="@+id/tvDurasiDetail"
                                 android:textSize="15sp"
-                                android:layout_marginTop="30dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
                                 android:textColor="@color/white"/>
                         </LinearLayout>
                     </LinearLayout>
-
                 </LinearLayout>
-
             </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textColor="@color/tcolor"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Film Title"
+                    android:id="@+id/tvDescJudulDetail"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Synopsis"
+                        android:textColor="@color/tcolor"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Film Synopsis"
+                        android:id="@+id/tvSynopsisDetail"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="180dp"
+                        android:layout_height="70dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Director"
+                            android:textColor="@color/tcolor"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Director Name"
+                            android:id="@+id/tvDescDirectorDetail"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="180dp"
+                        android:layout_height="70dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Aired"
+                            android:textColor="@color/tcolor"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Release Date"
+                            android:id="@+id/tvDescReleaseDetail"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="180dp"
+                        android:layout_height="70dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rating"
+                            android:textColor="@color/tcolor"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="13+"
+                            android:id="@+id/tvDescRatingDetail"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="180dp"
+                        android:layout_height="70dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Licencor"
+                            android:textColor="@color/tcolor"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unknown"
+                            android:id="@+id/tvDescLicencorDetail"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="100dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/yellow"/>
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 
