@@ -30,6 +30,8 @@ class MainView : AppCompatActivity() {
         val db = AppDatabase.Companion.getDatabase(this)
         filmDao = db.filmDao()
 
+
+
         recyclerFilm = findViewById(R.id.recyclerFilm)
         recyclerFilm.layoutManager = GridLayoutManager(this, 2)
 
@@ -44,12 +46,19 @@ class MainView : AppCompatActivity() {
     private fun loadData() {
         lifecycleScope.launch {
             val listFilm = filmDao.getAllFilm()
-            recyclerFilm.adapter = FilmAdapter(listFilm) { film ->
-                lifecycleScope.launch {
-                    filmDao.deleteFilm(film)
-                    loadData() // reload setelah delete
+            recyclerFilm.adapter = FilmAdapter(
+                listFilm = listFilm,
+                onItemClick = { film ->
+                    // aksi klik
+                    val intent = Intent(this@MainView, DetailFilmActivity::class.java)
+                    intent.putExtra("filmId", film.idFilm)
+                    intent.putExtra("judul", film.judul)
+                    intent.putExtra("genre", film.genre)
+                    intent.putExtra("poster", film.posterUri)
+
+                    startActivity(intent)
                 }
-            }
-        }
+            )
+                }
     }
 }
