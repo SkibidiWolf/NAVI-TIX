@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import com.example.navi.R
 import com.example.navi.data.AppDatabase
@@ -43,14 +44,17 @@ class FilmForm : AppCompatActivity() {
         val db = AppDatabase.Companion.getDatabase(applicationContext)
         filmDao = db.filmDao()
 
-        val btnPilihGambar = findViewById<TextView>(R.id.btnPilihGambar)
+        val btnPilihGambar = findViewById<CardView>(R.id.btnPilihGambar)
         imgPreview = findViewById(R.id.imgPreview)
 
         val etJudul = findViewById<TextInputEditText>(R.id.etJudul)
         val etGenre = findViewById<TextInputEditText>(R.id.etGenre)
         val etDurasi = findViewById<TextInputEditText>(R.id.etDurasi)
+        val etDirector = findViewById<TextInputEditText>(R.id.etDirector)
+        val etSynopsis = findViewById<TextInputEditText>(R.id.etSynopsis)
         val etJadwal = findViewById<TextInputEditText>(R.id.etJadwal)
         val etHarga = findViewById<TextInputEditText>(R.id.etHarga)
+
 
         val btnSave = findViewById<TextView>(R.id.btnSave)
 
@@ -63,6 +67,8 @@ class FilmForm : AppCompatActivity() {
             val judul = etJudul.text.toString()
             val genre = etGenre.text.toString()
             val durasi = etDurasi.text.toString().toIntOrNull() ?: 0
+            val director = etDirector.text.toString()
+            val synopsis = etSynopsis.text.toString()
             val harga = etHarga.text.toString().toIntOrNull() ?: 0
             val tanggal = etJadwal.text.toString()
             val poster = selectedImageUri?.toString() ?: ""
@@ -73,6 +79,8 @@ class FilmForm : AppCompatActivity() {
                 judul = judul,
                 genre = genre,
                 durasi = durasi,
+                director = director,
+                synopsis = synopsis,
                 jadwaltayang = tanggal,
                 hargaTiket = harga,
                 posterUri = poster
