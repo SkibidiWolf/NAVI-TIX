@@ -1,4 +1,4 @@
-package com.example.navi
+package com.example.navi.ui
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.UnderlineSpan
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.navi.ui.MainView
+import com.example.navi.R
 
 class LoginForm : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

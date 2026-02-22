@@ -1,14 +1,13 @@
-package com.example.navi
-
+package com.example.navi.ui
 
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.navi.R
 import com.example.navi.data.Film
 
 class FilmAdapter(
@@ -17,7 +16,6 @@ class FilmAdapter(
 ) : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
 
     inner class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val btnDelete: ImageView = itemView.findViewById(R.id.btnDelete)
         val tvJudul: TextView = itemView.findViewById(R.id.tvJudul)
         val tvGenre: TextView = itemView.findViewById(R.id.tvGenre)
         val imgPoster: ImageView = itemView.findViewById(R.id.imgPoster)
@@ -43,9 +41,7 @@ class FilmAdapter(
             }
         }
 
-        holder.btnDelete.setOnClickListener {
-            onDeleteClick(film)
-        }
+
     }
 
     override fun getItemCount(): Int = listFilm.size

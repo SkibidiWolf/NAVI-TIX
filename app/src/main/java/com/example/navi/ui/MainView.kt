@@ -1,17 +1,15 @@
-package com.example.navi
+package com.example.navi.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.navi.R
 import com.example.navi.data.AppDatabase
 import com.example.navi.data.FilmDao
 import kotlinx.coroutines.launch
@@ -29,11 +27,11 @@ class MainView : AppCompatActivity() {
         btnForm.setOnClickListener { val intent = Intent(this, FilmForm::class.java)
             startActivity(intent)  };
 
-        val db = AppDatabase.getDatabase(this)
+        val db = AppDatabase.Companion.getDatabase(this)
         filmDao = db.filmDao()
 
         recyclerFilm = findViewById(R.id.recyclerFilm)
-        recyclerFilm.layoutManager = LinearLayoutManager(this)
+        recyclerFilm.layoutManager = GridLayoutManager(this, 2)
 
         loadData()
     }

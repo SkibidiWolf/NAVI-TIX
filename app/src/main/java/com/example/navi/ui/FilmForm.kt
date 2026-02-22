@@ -1,4 +1,4 @@
-package com.example.navi
+package com.example.navi.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.navi.R
 import com.example.navi.data.AppDatabase
 import com.example.navi.data.Film
 import com.example.navi.data.FilmDao
@@ -39,7 +40,7 @@ class FilmForm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_film_form)
-        val db = AppDatabase.getDatabase(applicationContext)
+        val db = AppDatabase.Companion.getDatabase(applicationContext)
         filmDao = db.filmDao()
 
         val btnPilihGambar = findViewById<TextView>(R.id.btnPilihGambar)

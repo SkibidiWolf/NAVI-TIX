@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NAVI">
         <activity
-            android:name=".FilmForm"
+            android:name=".ui.FilmForm"
             android:exported="false" />
         <activity
-            android:name=".MainView"
+            android:name=".ui.MainView"
             android:exported="false" />
         <activity
-            android:name=".LoginForm"
+            android:name=".ui.LoginForm"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
