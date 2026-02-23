@@ -44,6 +44,10 @@ class FilmForm : AppCompatActivity() {
         val db = AppDatabase.Companion.getDatabase(applicationContext)
         filmDao = db.filmDao()
 
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+
+        btnBack.setOnClickListener { finish() }
+
         val btnPilihGambar = findViewById<CardView>(R.id.btnPilihGambar)
         imgPreview = findViewById(R.id.imgPreview)
 
@@ -73,7 +77,7 @@ class FilmForm : AppCompatActivity() {
             val tanggal = etJadwal.text.toString()
             val poster = selectedImageUri?.toString() ?: ""
 
-            // Nanti di sini kamu insert ke database
+
 
             val film = Film(
                 judul = judul,
