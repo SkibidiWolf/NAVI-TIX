@@ -37,6 +37,13 @@ class FilmForm : AppCompatActivity() {
         }
 
     private lateinit var filmDao: FilmDao
+    fun extractYoutubeId(url: String): String {
+        return when {
+            url.contains("v=") -> url.substringAfter("v=").substringBefore("&")
+            url.contains("youtu.be/") -> url.substringAfter("youtu.be/").substringBefore("?")
+            else -> url
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -58,6 +65,8 @@ class FilmForm : AppCompatActivity() {
         val etSynopsis = findViewById<TextInputEditText>(R.id.etSynopsis)
         val etJadwal = findViewById<TextInputEditText>(R.id.etJadwal)
         val etHarga = findViewById<TextInputEditText>(R.id.etHarga)
+        val etTrailer = findViewById<TextInputEditText>(R.id.etTrailer)
+
 
 
         val btnSave = findViewById<TextView>(R.id.btnSave)
@@ -76,6 +85,9 @@ class FilmForm : AppCompatActivity() {
             val harga = etHarga.text.toString().toIntOrNull() ?: 0
             val tanggal = etJadwal.text.toString()
             val poster = selectedImageUri?.toString() ?: ""
+            val trailerLink = etTrailer.text.toString()
+            val trailerId = extractYoutubeId(trailerLink)
+
 
 
 
@@ -87,7 +99,8 @@ class FilmForm : AppCompatActivity() {
                 synopsis = synopsis,
                 jadwaltayang = tanggal,
                 hargaTiket = harga,
-                posterUri = poster
+                posterUri = poster,
+                trailerId = trailerId
             )
             lifecycleScope.launch {
                 filmDao.insertFilm(film)

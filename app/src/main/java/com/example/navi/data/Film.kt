@@ -14,5 +14,6 @@ data class Film(
     val director: String,
     val synopsis: String,
     val jadwaltayang: String,
-    val hargaTiket: Int
+    val hargaTiket: Int,
+    val trailerId: String
 )

@@ -14,6 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.navi.R
 import com.example.navi.data.AppDatabase
 import com.example.navi.data.FilmDao
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.launch
 
 class DetailFilmActivity : AppCompatActivity() {
@@ -64,6 +67,7 @@ class DetailFilmActivity : AppCompatActivity() {
         val release = intent.getStringExtra("tanggal")
         val harga = intent.getIntExtra("harga", 0)
         val poster = intent.getStringExtra("poster")
+        val trailerId = intent.getStringExtra("TRAILER_ID")
 
         tvJudul.text = judul
         tvDescJudul.text = judul
@@ -81,6 +85,17 @@ class DetailFilmActivity : AppCompatActivity() {
             imgPoster.setImageURI(uri)
             imgBackground.setImageURI(uri)
         }
+
+        val youtubePlayerView = findViewById<YouTubePlayerView>(R.id.youtubePlayer)
+        lifecycle.addObserver(youtubePlayerView)
+
+        youtubePlayerView.enableAutomaticInitialization = false
+
+        youtubePlayerView.initialize(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.cueVideo("dQw4w9WgXcQ", 0f)
+            }
+        }, true)
 
     }
 
