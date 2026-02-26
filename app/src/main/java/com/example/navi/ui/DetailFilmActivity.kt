@@ -3,9 +3,11 @@ package com.example.navi.ui
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,6 +20,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.launch
+import com.bumptech.glide.Glide
 
 class DetailFilmActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -34,6 +37,10 @@ class DetailFilmActivity : AppCompatActivity() {
         filmId = intent.getIntExtra("filmId", 0)
 
         val btnDelete = findViewById<TextView>(R.id.btnDelete)
+        val errorOverlay = findViewById<LinearLayout>(R.id.errorOverlay)
+        val btnOpenYoutube = findViewById<Button>(R.id.btnOpenYoutube)
+        val imgThumbnail = findViewById<ImageView>(R.id.imgThumbnail)
+        val imgPlay = findViewById<ImageView>(R.id.imgPlay)
 
         btnDelete.setOnClickListener {
             lifecycleScope.launch {
@@ -67,7 +74,8 @@ class DetailFilmActivity : AppCompatActivity() {
         val release = intent.getStringExtra("tanggal")
         val harga = intent.getIntExtra("harga", 0)
         val poster = intent.getStringExtra("poster")
-        val trailerId = intent.getStringExtra("TRAILER_ID")
+        val trailerId = intent.getStringExtra("trailer")
+        val videoId = trailerId ?: return
 
         tvJudul.text = judul
         tvDescJudul.text = judul
@@ -87,15 +95,55 @@ class DetailFilmActivity : AppCompatActivity() {
         }
 
         val youtubePlayerView = findViewById<YouTubePlayerView>(R.id.youtubePlayer)
+        // Load thumbnail otomatis dari YouTube
+        val thumbnailUrl = "https://img.youtube.com/vi/$videoId/hqdefault.jpg"
+
+        Glide.with(this)
+            .load(thumbnailUrl)
+            .into(imgThumbnail)
+
+// Klik thumbnail → tampilkan player
+        imgThumbnail.setOnClickListener {
+            imgThumbnail.visibility = View.GONE
+            imgPlay.visibility = View.GONE
+            youtubePlayerView.visibility = View.VISIBLE
+        }
+
+        imgPlay.setOnClickListener {
+            imgThumbnail.performClick()
+        }
+
         lifecycle.addObserver(youtubePlayerView)
 
         youtubePlayerView.enableAutomaticInitialization = false
 
         youtubePlayerView.initialize(object : AbstractYouTubePlayerListener() {
+
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.cueVideo("dQw4w9WgXcQ", 0f)
+                imgThumbnail.setOnClickListener {
+                    imgThumbnail.visibility = View.GONE
+                    imgPlay.visibility = View.GONE
+                    youtubePlayerView.visibility = View.VISIBLE
+                    youTubePlayer.loadVideo(videoId, 0f)
+                }
             }
+
+            override fun onError(
+                youTubePlayer: YouTubePlayer,
+                error: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants.PlayerError
+            ) {
+                errorOverlay.visibility = View.VISIBLE
+            }
+
         }, true)
+
+        btnOpenYoutube.setOnClickListener {
+            val intent = android.content.Intent(
+                android.content.Intent.ACTION_VIEW,
+                Uri.parse("https://www.youtube.com/watch?v=$videoId")
+            )
+            startActivity(intent)
+        }
 
     }
 
