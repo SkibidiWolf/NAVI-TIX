@@ -26,4 +26,7 @@ interface FilmDao {
 
     @Query("DELETE FROM film WHERE idFilm = :id")
     suspend fun deleteById(id: Int)
+
+    @Query("SELECT * FROM film ORDER BY RANDOM() LIMIT 1")
+    suspend fun getRandomFilm(): Film?
 }

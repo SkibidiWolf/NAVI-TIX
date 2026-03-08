@@ -4,7 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.view.View
+import com.bumptech.glide.Glide
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -24,10 +28,43 @@ class MainView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_view)
-
-
         val db = AppDatabase.Companion.getDatabase(this)
         filmDao = db.filmDao()
+
+        //promo iklan
+        val promoOverlay = findViewById<LinearLayout>(R.id.promoOverlay)
+        val imgPromoPoster = findViewById<ImageView>(R.id.imgPromoPoster)
+        val tvPromoTitle = findViewById<TextView>(R.id.tvPromoTitle)
+        val btnPromoClose = findViewById<Button>(R.id.btnPromoClose)
+
+        lifecycleScope.launch {
+
+            val film = filmDao.getRandomFilm()
+
+            if (film != null) {
+
+                promoOverlay.visibility = View.VISIBLE
+                tvPromoTitle.text = film.judul
+
+                Glide.with(this@MainView)
+                    .load(film.posterUri)
+                    .into(imgPromoPoster)
+
+            } else {
+
+                // database kosong → promo tidak ditampilkan
+                promoOverlay.visibility = View.GONE
+
+            }
+        }
+
+        btnPromoClose.setOnClickListener {
+            promoOverlay.visibility = View.GONE
+        }
+
+
+
+
 
 
 

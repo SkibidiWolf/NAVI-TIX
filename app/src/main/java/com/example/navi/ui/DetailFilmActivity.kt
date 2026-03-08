@@ -95,14 +95,14 @@ class DetailFilmActivity : AppCompatActivity() {
         }
 
         val youtubePlayerView = findViewById<YouTubePlayerView>(R.id.youtubePlayer)
-        // Load thumbnail otomatis dari YouTube
+        //Load thumbnail otomatis dari YouTube
         val thumbnailUrl = "https://img.youtube.com/vi/$videoId/hqdefault.jpg"
 
         Glide.with(this)
             .load(thumbnailUrl)
             .into(imgThumbnail)
 
-// Klik thumbnail → tampilkan player
+//Klik thumbnail = tampilkan player
         imgThumbnail.setOnClickListener {
             imgThumbnail.visibility = View.GONE
             imgPlay.visibility = View.GONE
