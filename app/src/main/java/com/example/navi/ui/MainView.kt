@@ -35,7 +35,12 @@ class MainView : AppCompatActivity() {
         val promoOverlay = findViewById<LinearLayout>(R.id.promoOverlay)
         val imgPromoPoster = findViewById<ImageView>(R.id.imgPromoPoster)
         val tvPromoTitle = findViewById<TextView>(R.id.tvPromoTitle)
-        val btnPromoClose = findViewById<Button>(R.id.btnPromoClose)
+        val tvPromoGenre = findViewById<TextView>(R.id.tvGenre)
+        val btnPromoClose = findViewById<ImageView>(R.id.btnPromoClose)
+        val btnPromoBuy = findViewById<TextView>(R.id.btnPromoBuy)
+
+
+
 
         lifecycleScope.launch {
 
@@ -50,11 +55,23 @@ class MainView : AppCompatActivity() {
                     .load(film.posterUri)
                     .into(imgPromoPoster)
 
-            } else {
+                btnPromoBuy.setOnClickListener {
 
-                // database kosong → promo tidak ditampilkan
-                promoOverlay.visibility = View.GONE
+                    val intent = Intent(this@MainView, DetailFilmActivity::class.java)
 
+                    intent.putExtra("filmId", film.idFilm)
+                    intent.putExtra("judul", film.judul)
+                    intent.putExtra("genre", film.genre)
+                    intent.putExtra("durasi", film.durasi)
+                    intent.putExtra("director", film.director)
+                    intent.putExtra("synopsis", film.synopsis)
+                    intent.putExtra("tanggal", film.jadwaltayang)
+                    intent.putExtra("harga", film.hargaTiket)
+                    intent.putExtra("poster", film.posterUri)
+                    intent.putExtra("trailer", film.trailerId)
+
+                    startActivity(intent)
+                }
             }
         }
 
