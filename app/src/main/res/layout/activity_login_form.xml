@@ -180,6 +180,17 @@
                         android:background="@drawable/cradius"
                         android:layout_marginTop="10dp"
                         android:text="LOGIN"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="25dp"
+                        android:text="Doesn't have an account?"
+                        android:layout_marginEnd="15dp"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/tcolor"
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
 
 
 
