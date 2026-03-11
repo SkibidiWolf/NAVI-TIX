@@ -31,8 +31,14 @@ class LoginForm : AppCompatActivity() {
         val btnLogin = findViewById<TextView>(R.id.btnLogin)
         val btnToRegister = findViewById<TextView>(R.id.btnToRegister)
         val etUsername = findViewById<TextInputEditText>(R.id.Username)
-        val etEmail = findViewById<TextInputEditText>(R.id.tvEmail)
         val etPassword = findViewById<TextInputEditText>(R.id.Password)
+        val sharedPref = getSharedPreferences("user_session", MODE_PRIVATE)
+
+
+        if(sharedPref.getBoolean("isLoggedIn", false)){
+            startActivity(Intent(this, MainView::class.java))
+            finish()
+        }
 
 
         val text = "I agree the Term of use and Condition"
@@ -80,6 +86,10 @@ class LoginForm : AppCompatActivity() {
 
                 if (user != null) {
 
+                    val editor = sharedPref.edit()
+                    editor.putBoolean("isLoggedIn", true)
+                    editor.apply()
+
                     startActivity(Intent(this@LoginForm, MainView::class.java))
                     finish()
 
@@ -87,7 +97,7 @@ class LoginForm : AppCompatActivity() {
 
                     Toast.makeText(
                         this@LoginForm,
-                        "Username atau password salah",
+                        "Username or Password is incorrect",
                         Toast.LENGTH_SHORT
                     ).show()
 

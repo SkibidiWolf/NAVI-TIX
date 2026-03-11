@@ -29,31 +29,37 @@ class RegisterForm : AppCompatActivity() {
         val Password = findViewById<TextInputEditText>(R.id.Password)
         val db = AppDatabase.getDatabase(this)
         btnRegister.setOnClickListener {
-            if(Username.text.isNullOrEmpty() || Email.text.isNullOrEmpty() || Password.text.isNullOrEmpty()){
+
+            val username = Username.text.toString()
+            val email = Email.text.toString()
+            val password = Password.text.toString()
+
+            if(username.isEmpty() || email.isEmpty() || password.isEmpty()){
                 Toast.makeText(this, "Missing Information", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             lifecycleScope.launch {
 
+                val existingUser = db.userDao().getUser(username)
 
+                if(existingUser != null){
+                    Toast.makeText(this@RegisterForm, "Username sudah dipakai", Toast.LENGTH_SHORT).show()
+                    return@launch
+                }
 
                 val user = User(
-                    username = Username.text.toString(),
-                    email = Email.text.toString(),
-                    password = Password.text.toString()
+                    username = username,
+                    email = email,
+                    password = password
                 )
-
 
                 db.userDao().insertUser(user)
 
                 Toast.makeText(this@RegisterForm, "Register complete", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this@RegisterForm, LoginForm::class.java)
-                startActivity(intent)
-
+                startActivity(Intent(this@RegisterForm, LoginForm::class.java))
                 finish()
-
             }
         }
     }
