@@ -1,5 +1,6 @@
 package com.example.navi.ui
 
+import android.R.attr.closeIcon
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.SearchView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat.enableEdgeToEdge
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -44,14 +46,25 @@ class HomeFragment : Fragment(R.layout.activity_main_view) {
         val btnPromoClose = view.findViewById<ImageView>(R.id.btnPromoClose)
         val btnPromoBuy = view.findViewById<TextView>(R.id.btnPromoBuy)
         val searchView = view.findViewById<SearchView>(R.id.searchView)
+        val searchIcon = searchView.findViewById<ImageView>(
+            androidx.appcompat.R.id.search_mag_icon
+        )
+        val closeIcon = searchView.findViewById<ImageView>(
+            androidx.appcompat.R.id.search_close_btn
+        )
+        val color = ContextCompat.getColor(requireContext(), R.color.gray)
+
+        searchIcon.setColorFilter(color)
+        closeIcon.setColorFilter(color)
 
         val searchText =
             searchView.findViewById<AutoCompleteTextView>(
                 androidx.appcompat.R.id.search_src_text
             )
 
-        searchText.setTextColor(resources.getColor(R.color.black))
-        searchText.setHintTextColor(resources.getColor(R.color.black))
+        searchText.setTextColor(resources.getColor(R.color.gray))
+        searchText.setHintTextColor(resources.getColor(R.color.gray))
+
 
 
 

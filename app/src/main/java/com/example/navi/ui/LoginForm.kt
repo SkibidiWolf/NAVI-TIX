@@ -88,6 +88,7 @@ class LoginForm : AppCompatActivity() {
 
                     val editor = sharedPref.edit()
                     editor.putBoolean("isLoggedIn", true)
+                    editor.putInt("userId", user.id)
                     editor.apply()
 
                     startActivity(Intent(this@LoginForm, MainViewHome::class.java))

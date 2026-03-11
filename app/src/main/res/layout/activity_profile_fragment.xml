@@ -31,6 +31,13 @@
             android:layout_height="wrap_content"
             android:text="Ganti Foto"
             android:layout_marginTop="16dp"/>
+        <Button
+            android:id="@+id/btnSavePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Photo"/>
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
