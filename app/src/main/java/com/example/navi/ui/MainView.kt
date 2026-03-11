@@ -8,6 +8,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 class MainView : AppCompatActivity() {
     private lateinit var filmDao: FilmDao
     private lateinit var recyclerFilm: RecyclerView
+    private lateinit var adapter: FilmAdapter
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,21 @@ class MainView : AppCompatActivity() {
         val tvPromoGenre = findViewById<TextView>(R.id.tvGenre)
         val btnPromoClose = findViewById<ImageView>(R.id.btnPromoClose)
         val btnPromoBuy = findViewById<TextView>(R.id.btnPromoBuy)
+        val searchView = findViewById<SearchView>(R.id.searchView)
+
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter(newText ?: "")
+                return true
+            }
+        })
 
 
 
@@ -50,6 +67,7 @@ class MainView : AppCompatActivity() {
 
                 promoOverlay.visibility = View.VISIBLE
                 tvPromoTitle.text = film.judul
+                tvPromoGenre.text = film.genre
 
                 Glide.with(this@MainView)
                     .load(film.posterUri)
@@ -98,7 +116,9 @@ class MainView : AppCompatActivity() {
             bottomSheet.show(supportFragmentManager, "FilmBottomSheet")
 
         }
+
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -108,10 +128,10 @@ class MainView : AppCompatActivity() {
     private fun loadData() {
         lifecycleScope.launch {
             val listFilm = filmDao.getAllFilm()
-            recyclerFilm.adapter = FilmAdapter(
+            adapter = FilmAdapter(
                 listFilm = listFilm,
                 onItemClick = { film ->
-                    // aksi klik
+
                     val intent = Intent(this@MainView, DetailFilmActivity::class.java)
                     intent.putExtra("filmId", film.idFilm)
                     intent.putExtra("judul", film.judul)
@@ -124,10 +144,11 @@ class MainView : AppCompatActivity() {
                     intent.putExtra("poster", film.posterUri)
                     intent.putExtra("trailer", film.trailerId)
 
-
                     startActivity(intent)
                 }
             )
-                }
+
+            recyclerFilm.adapter = adapter
+        }
     }
 }

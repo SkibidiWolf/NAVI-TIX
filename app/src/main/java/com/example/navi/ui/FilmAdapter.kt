@@ -13,9 +13,14 @@ import com.example.navi.R
 import com.example.navi.data.Film
 
 class FilmAdapter(
-    private val listFilm: List<Film>,
+    listFilm: List<Film>,
     private val onItemClick: (Film) -> Unit
 ) : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
+
+    private var listFilm: MutableList<Film> = listFilm.toMutableList()
+    private var listFilmFull: MutableList<Film> = listFilm.toMutableList()
+
+
 
     inner class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvJudul: TextView = itemView.findViewById(R.id.tvJudul)
@@ -53,4 +58,26 @@ class FilmAdapter(
     }
 
     override fun getItemCount(): Int = listFilm.size
+
+    fun filter(query: String) {
+
+        val filteredList = mutableListOf<Film>()
+
+        if (query.isEmpty()) {
+            filteredList.addAll(listFilmFull)
+        } else {
+            for (film in listFilmFull) {
+                if (film.judul.lowercase().contains(query.lowercase()) ||
+                    film.genre.lowercase().contains(query.lowercase())
+                ) {
+                    filteredList.add(film)
+                }
+            }
+        }
+
+        listFilm.clear()
+        listFilm.addAll(filteredList)
+
+        notifyDataSetChanged()
+    }
 }
