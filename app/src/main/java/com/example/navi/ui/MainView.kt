@@ -2,13 +2,15 @@ package com.example.navi.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.view.View
 import com.bumptech.glide.Glide
 import android.widget.ImageView
+import android.widget.AutoCompleteTextView
 import android.widget.LinearLayout
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.navi.AppSession
 import com.example.navi.FilmBottomSheet
 import com.example.navi.R
 import com.example.navi.data.AppDatabase
@@ -42,6 +45,14 @@ class HomeFragment : Fragment(R.layout.activity_main_view) {
         val btnPromoBuy = view.findViewById<TextView>(R.id.btnPromoBuy)
         val searchView = view.findViewById<SearchView>(R.id.searchView)
 
+        val searchText =
+            searchView.findViewById<AutoCompleteTextView>(
+                androidx.appcompat.R.id.search_src_text
+            )
+
+        searchText.setTextColor(resources.getColor(R.color.black))
+        searchText.setHintTextColor(resources.getColor(R.color.black))
+
 
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -58,38 +69,41 @@ class HomeFragment : Fragment(R.layout.activity_main_view) {
 
 
 
+        if (!AppSession.promoShown) {
 
-        lifecycleScope.launch {
+            lifecycleScope.launch {
 
-            val film = filmDao.getRandomFilm()
+                val film = filmDao.getRandomFilm()
 
-            if (film != null) {
+                if (film != null) {
 
-                promoOverlay.visibility = View.VISIBLE
-                tvPromoTitle.text = film.judul
-                tvPromoGenre.text = film.genre
+                    promoOverlay.visibility = View.VISIBLE
+                    AppSession.promoShown = true
 
-                Glide.with(requireContext())
-                    .load(film.posterUri)
-                    .into(imgPromoPoster)
+                    tvPromoTitle.text = film.judul
+                    tvPromoGenre.text = film.genre
 
-                btnPromoBuy.setOnClickListener {
-                    val intent = Intent(requireContext(), DetailFilmActivity::class.java)
+                    Glide.with(requireContext())
+                        .load(film.posterUri)
+                        .into(imgPromoPoster)
 
+                    btnPromoBuy.setOnClickListener {
 
+                        val intent = Intent(requireContext(), DetailFilmActivity::class.java)
 
-                    intent.putExtra("filmId", film.idFilm)
-                    intent.putExtra("judul", film.judul)
-                    intent.putExtra("genre", film.genre)
-                    intent.putExtra("durasi", film.durasi)
-                    intent.putExtra("director", film.director)
-                    intent.putExtra("synopsis", film.synopsis)
-                    intent.putExtra("tanggal", film.jadwaltayang)
-                    intent.putExtra("harga", film.hargaTiket)
-                    intent.putExtra("poster", film.posterUri)
-                    intent.putExtra("trailer", film.trailerId)
+                        intent.putExtra("filmId", film.idFilm)
+                        intent.putExtra("judul", film.judul)
+                        intent.putExtra("genre", film.genre)
+                        intent.putExtra("durasi", film.durasi)
+                        intent.putExtra("director", film.director)
+                        intent.putExtra("synopsis", film.synopsis)
+                        intent.putExtra("tanggal", film.jadwaltayang)
+                        intent.putExtra("harga", film.hargaTiket)
+                        intent.putExtra("poster", film.posterUri)
+                        intent.putExtra("trailer", film.trailerId)
 
-                    startActivity(intent)
+                        startActivity(intent)
+                    }
                 }
             }
         }

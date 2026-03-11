@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.navi.ui.MainView
+import com.example.navi.MainViewHome
 import com.example.navi.R
 import com.example.navi.RegisterForm
 import com.example.navi.data.AppDatabase
@@ -36,7 +36,7 @@ class LoginForm : AppCompatActivity() {
 
 
         if(sharedPref.getBoolean("isLoggedIn", false)){
-            startActivity(Intent(this, MainView::class.java))
+            startActivity(Intent(this, MainViewHome::class.java))
             finish()
         }
 
@@ -90,7 +90,7 @@ class LoginForm : AppCompatActivity() {
                     editor.putBoolean("isLoggedIn", true)
                     editor.apply()
 
-                    startActivity(Intent(this@LoginForm, MainView::class.java))
+                    startActivity(Intent(this@LoginForm, MainViewHome::class.java))
                     finish()
 
                 } else {

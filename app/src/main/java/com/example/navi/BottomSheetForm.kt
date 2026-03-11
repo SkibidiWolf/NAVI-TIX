@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.navi.ui.FilmForm
 import com.example.navi.ui.LoginForm
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -30,8 +31,18 @@ class FilmBottomSheet() : BottomSheetDialogFragment() {
             startActivity(intent)
         }
         btnLogOut.setOnClickListener {
+
+            val sharedPref = requireActivity()
+                .getSharedPreferences("user_session", AppCompatActivity.MODE_PRIVATE)
+
+            val editor = sharedPref.edit()
+            editor.clear()
+            editor.apply()
+
             val intent = Intent(requireContext(), LoginForm::class.java)
             startActivity(intent)
+
+            requireActivity().finish()
         }
 
         return view

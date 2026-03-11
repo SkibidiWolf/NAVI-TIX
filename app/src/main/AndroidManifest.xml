@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NAVI">
         <activity
+            android:name=".ProfileFragment"
+            android:exported="false" />
+        <activity
             android:name=".MainViewHome"
             android:exported="false" />
         <activity

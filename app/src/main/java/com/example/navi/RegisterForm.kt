@@ -2,7 +2,12 @@ package com.example.navi
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +32,36 @@ class RegisterForm : AppCompatActivity() {
         val Email  = findViewById<TextInputEditText>(R.id.tvEmail)
         val btnRegister = findViewById<TextView>(R.id.btnRegister)
         val Password = findViewById<TextInputEditText>(R.id.Password)
+        val checkbox = findViewById<CheckBox>(R.id.checkbox_terms)
+
+        // checkbox messages
+
+        val text = "I agree the Term of use and Condition"
+        val spannable = SpannableString(text)
+
+
+        val termStart = text.indexOf("Term of use")
+        val termEnd = termStart + "Term of use".length
+        spannable.setSpan(
+            ForegroundColorSpan(Color.parseColor("#90DAFF")),
+            termStart,
+            termEnd,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+
+        val condStart = text.indexOf("Condition")
+        val condEnd = condStart + "Condition".length
+        spannable.setSpan(
+            ForegroundColorSpan(Color.parseColor("#90DAFF")),
+            condStart,
+            condEnd,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        checkbox.text = spannable
+
+
         val db = AppDatabase.getDatabase(this)
         btnRegister.setOnClickListener {
 
