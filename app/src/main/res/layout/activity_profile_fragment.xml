@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white2"
     tools:context=".ProfileFragment">
 
     <LinearLayout
@@ -63,6 +64,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
@@ -73,11 +75,13 @@
                     app:cardCornerRadius="100dp"
                     app:cardElevation="20dp">
 
+
                     <ImageView
                         android:id="@+id/imgProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
+                        android:background="@color/white"
                         android:src="@drawable/ic_profile" />
                 </androidx.cardview.widget.CardView>
 
@@ -95,7 +99,7 @@
                         android:layout_marginTop="45dp"
                         android:text="Username"
                         android:textColor="@color/black"
-                        android:textSize="19sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -106,7 +110,7 @@
                         android:layout_marginStart="15dp"
                         android:text="ID : 12345"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -118,37 +122,48 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="5dp"
-                            android:paddingLeft="30dp"
-                            android:paddingTop="5dp"
+                            android:textAlignment="center"
+                            android:layout_marginStart="10dp"
+                            android:paddingLeft="25dp"
+                            android:paddingTop="8dp"
                             android:textColor="@color/white"
-                            android:paddingBottom="5dp"
-                            android:paddingRight="30dp"
+                            android:paddingBottom="8dp"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:paddingRight="25dp"
                             android:background="@drawable/cradius7"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="5dp"
                             android:text="Edit Photo" />
 
                         <TextView
                             android:id="@+id/btnSavePhoto"
-                            android:layout_width="wrap_content"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginStart="10dp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:textSize="10sp"
+                            android:layout_marginTop="10dp"
                             android:textColor="@color/white"
                             android:background="@drawable/cradius7"
-                            android:paddingLeft="30dp"
-                            android:layout_marginTop="20dp"
-                            android:paddingTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:paddingRight="30dp"
-                            android:text="Save Photo" />
+                            android:layout_marginBottom="5dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Save" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
 
+
         </androidx.cardview.widget.CardView>
+
+
 
 
     </LinearLayout>

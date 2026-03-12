@@ -45,8 +45,8 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
         imgProfile = view.findViewById(R.id.imgProfile)
         tvUsername = view.findViewById(R.id.tvUsername)
         tvId = view.findViewById(R.id.tvId)
-        val btnChange = view.findViewById<Button>(R.id.btnChangePhoto)
-        val btnSave = view.findViewById<Button>(R.id.btnSavePhoto)
+        val btnChange = view.findViewById<TextView>(R.id.btnChangePhoto)
+        val btnSave = view.findViewById<TextView>(R.id.btnSavePhoto)
 
         db = AppDatabase.getDatabase(requireContext())
 
