@@ -23,6 +23,7 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
 
     private lateinit var imgProfile: ImageView
     private lateinit var tvUsername: TextView
+    private lateinit var tvId: TextView
     private lateinit var db: AppDatabase
     private var selectedImageUri: Uri? = null
     private var userId: Int = -1
@@ -43,6 +44,7 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
 
         imgProfile = view.findViewById(R.id.imgProfile)
         tvUsername = view.findViewById(R.id.tvUsername)
+        tvId = view.findViewById(R.id.tvId)
         val btnChange = view.findViewById<Button>(R.id.btnChangePhoto)
         val btnSave = view.findViewById<Button>(R.id.btnSavePhoto)
 
@@ -61,6 +63,8 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
             if (user != null) {
 
                 tvUsername.text = user.username
+                tvId.text = "ID : ${user.id}"
+
 
                 if (user.profilePhoto != null) {
 
