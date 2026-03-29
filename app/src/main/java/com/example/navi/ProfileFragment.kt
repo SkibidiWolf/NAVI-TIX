@@ -17,7 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.navi.data.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
 
@@ -99,6 +102,13 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
 
                 Toast.makeText(requireContext(), "Choose a photo first", Toast.LENGTH_SHORT).show()
 
+            }
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            val tickets = db.TicketDao().getTicketsWithFilm(userId)
+
+            withContext(Dispatchers.Main) {
+                adapter.submitList(tickets)
             }
         }
     }

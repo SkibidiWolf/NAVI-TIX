@@ -41,7 +41,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:id="@+id/Buy"
+                    android:id="@+id/BuyButton"
                     android:textColor="@color/tcolor2"
                     android:textAlignment="center"
                     android:gravity="center"
