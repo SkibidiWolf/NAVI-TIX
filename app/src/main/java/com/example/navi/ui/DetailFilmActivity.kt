@@ -21,6 +21,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.launch
 import com.bumptech.glide.Glide
+import com.example.navi.BuyBottomSheet
+import com.example.navi.FilmBottomSheet
 
 class DetailFilmActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -143,6 +145,18 @@ class DetailFilmActivity : AppCompatActivity() {
                 Uri.parse("https://www.youtube.com/watch?v=$videoId")
             )
             startActivity(intent)
+        }
+        val kota1 = findViewById<TextView>(R.id.kota1)
+
+        kota1.setOnClickListener {
+            val bottomSheet = BuyBottomSheet()
+            bottomSheet.show(supportFragmentManager, "BuyBottomSheet")
+        }
+        val kota2 = findViewById<TextView>(R.id.kota2)
+
+        kota2.setOnClickListener {
+            val bottomSheet = BuyBottomSheet()
+            bottomSheet.show(supportFragmentManager, "BuyBottomSheet")
         }
 
     }
