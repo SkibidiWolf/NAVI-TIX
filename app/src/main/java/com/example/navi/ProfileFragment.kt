@@ -53,6 +53,14 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
         tvId = view.findViewById(R.id.tvId)
         val btnChange = view.findViewById<TextView>(R.id.btnChangePhoto)
         val btnSave = view.findViewById<TextView>(R.id.btnSavePhoto)
+        val btnDetail = view.findViewById<ImageView>(R.id.btnMenu)
+
+        btnDetail.setOnClickListener {
+
+            val bottomSheet = FilmBottomSheet()
+            bottomSheet.show(parentFragmentManager, "FilmBottomSheet")
+
+        }
 
         db = AppDatabase.getDatabase(requireContext())
 
