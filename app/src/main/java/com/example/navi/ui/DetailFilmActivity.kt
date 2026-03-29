@@ -147,15 +147,26 @@ class DetailFilmActivity : AppCompatActivity() {
             startActivity(intent)
         }
         val kota1 = findViewById<TextView>(R.id.kota1)
+        val kota2 = findViewById<TextView>(R.id.kota2)
 
         kota1.setOnClickListener {
             val bottomSheet = BuyBottomSheet()
+
+            // 🔹 Pass the filmId to the bottom sheet
+            val bundle = Bundle()
+            bundle.putInt("filmId", filmId) // Use the filmId variable from this activity
+            bottomSheet.arguments = bundle
+
             bottomSheet.show(supportFragmentManager, "BuyBottomSheet")
         }
-        val kota2 = findViewById<TextView>(R.id.kota2)
-
         kota2.setOnClickListener {
             val bottomSheet = BuyBottomSheet()
+
+            // 🔹 Pass the filmId to the bottom sheet
+            val bundle = Bundle()
+            bundle.putInt("filmId", filmId) // Use the filmId variable from this activity
+            bottomSheet.arguments = bundle
+
             bottomSheet.show(supportFragmentManager, "BuyBottomSheet")
         }
 

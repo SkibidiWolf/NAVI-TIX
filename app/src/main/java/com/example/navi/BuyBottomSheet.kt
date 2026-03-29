@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import com.example.navi.data.TicketWithFilm
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.navi.data.AppDatabase
 import com.example.navi.data.Ticket
 import com.example.navi.ui.FilmForm
@@ -19,10 +22,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class BuyBottomSheet() : BottomSheetDialogFragment() {
+class BuyBottomSheet : BottomSheetDialogFragment() {
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,23 +35,43 @@ class BuyBottomSheet() : BottomSheetDialogFragment() {
         val view = inflater.inflate(R.layout.activity_buy_bottom_sheet, container, false)
         val buyButton = view.findViewById<TextView>(R.id.BuyButton)
 
-        // 1. Get the database instance
         val db = AppDatabase.getDatabase(requireContext())
 
+        // 🔹 Ambil userId dari session
+        val sharedPref = requireActivity()
+            .getSharedPreferences("user_session", AppCompatActivity.MODE_PRIVATE)
+
+        val userId = sharedPref.getInt("userId", -1)
+
+        // 🔹 Ambil filmId dari arguments
+        val filmId = arguments?.getInt("filmId") ?: -1
+
         buyButton.setOnClickListener {
-            // 2. Create a new ticket object
+            println("DEBUG userId: $userId")
+            println("DEBUG filmId: $filmId")
+
+
+
+            if (userId == -1 || filmId == -1) {
+                Toast.makeText(requireContext(), "Invalid data", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val ticket = Ticket(
-                userId = 1,
-                filmId = 1
+                userId = userId,
+                filmId = filmId
             )
 
-            CoroutineScope(Dispatchers.IO).launch {
-                // 3. Insert the ticket into the database
-                db.TicketDao().insertTicket(ticket)
+            viewLifecycleOwner.lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    db.TicketDao().insertTicket(ticket)
+                }
+
+                Toast.makeText(requireContext(), "Ticket berhasil dibeli", Toast.LENGTH_SHORT).show()
+
+                dismiss() // tutup bottom sheet
             }
         }
-
-
 
         return view
     }

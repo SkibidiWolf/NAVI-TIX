@@ -13,10 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.navi.data.AppDatabase
+import com.example.navi.ui.TicketAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -104,12 +107,26 @@ class ProfileFragment : Fragment(R.layout.activity_profile_fragment) {
 
             }
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            val tickets = db.TicketDao().getTicketsWithFilm(userId)
+        val adapter = TicketAdapter()
 
-            withContext(Dispatchers.Main) {
-                adapter.submitList(tickets)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerTicket)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val data = withContext(Dispatchers.IO) {
+                db.TicketDao().getTicketsWithFilm(userId)
             }
+
+            adapter.submitList(data)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val tickets = withContext(Dispatchers.IO) {
+                db.TicketDao().getTicketsWithFilm(userId)
+            }
+
+            adapter.submitList(tickets)
         }
     }
 }
