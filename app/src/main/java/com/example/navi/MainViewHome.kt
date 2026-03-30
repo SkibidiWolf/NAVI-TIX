@@ -29,6 +29,12 @@ class MainViewHome : AppCompatActivity() {
                         .commit()
                 }
 
+                R.id.nav_theater -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, TheaterFragment())
+                        .commit()
+                }
+
                 R.id.nav_profile -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, ProfileFragment())

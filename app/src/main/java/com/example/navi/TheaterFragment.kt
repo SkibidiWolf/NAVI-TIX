@@ -15,7 +15,7 @@ import com.example.navi.data.FilmDao
 import com.example.navi.data.TheaterDao
 import com.example.navi.ui.FilmAdapter
 
-class HomeFragment : Fragment(R.layout.activity_theater_fragment) {
+class TheaterFragment : Fragment(R.layout.activity_theater_fragment) {
     private lateinit var theaterDao: TheaterDao
     private lateinit var recyclerFilm: RecyclerView
     private lateinit var adapter: FilmAdapter

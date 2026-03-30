@@ -25,9 +25,15 @@ class FilmBottomSheet() : BottomSheetDialogFragment() {
 
         val btnForm = view.findViewById<TextView>(R.id.btnForm)
         val btnLogOut = view.findViewById<TextView>(R.id.btnLogOut)
+        val btnCinemaForm = view.findViewById<TextView>(R.id.btnCinemaForm)
+
 
         btnForm.setOnClickListener {
             val intent = Intent(requireContext(), FilmForm::class.java)
+            startActivity(intent)
+        }
+        btnCinemaForm.setOnClickListener {
+            val intent = Intent(requireContext(), TheaterForm::class.java)
             startActivity(intent)
         }
         btnLogOut.setOnClickListener {

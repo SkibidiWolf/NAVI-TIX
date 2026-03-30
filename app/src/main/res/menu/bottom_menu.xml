@@ -9,6 +9,11 @@
         android:icon="@drawable/ic_home"/>
 
     <item
+        android:id="@+id/nav_theater"
+        android:title="Theater"
+        android:icon="@drawable/ic_theater"/>
+
+    <item
         android:id="@+id/nav_profile"
         android:title="Profile"
         android:icon="@drawable/ic_profile"/>
