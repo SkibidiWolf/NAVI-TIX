@@ -13,7 +13,9 @@
         android:roundIcon="@drawable/navilogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.NAVI">
-
+        <activity
+            android:name=".TheaterFragment"
+            android:exported="false" />
         <activity
             android:name=".MainViewHome"
             android:exported="false" />
@@ -26,7 +28,6 @@
         <activity
             android:name=".ui.FilmForm"
             android:exported="false" />
-
         <activity
             android:name=".ui.LoginForm"
             android:exported="false" />
