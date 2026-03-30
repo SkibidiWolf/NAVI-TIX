@@ -10,16 +10,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="6dp">
 
         <!-- Gambar Theater -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="10dp">
         <ImageView
             android:id="@+id/imgTheater"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@android:drawable/ic_menu_gallery" />
+        </androidx.cardview.widget.CardView>
 
         <!-- Text Container -->
         <LinearLayout
@@ -34,6 +41,7 @@
                 android:id="@+id/tvNamaTheater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/gray"
                 android:text="Nama Theater"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -45,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lokasi Theater"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/tcolor"
                 android:layout_marginTop="4dp" />
 
         </LinearLayout>
